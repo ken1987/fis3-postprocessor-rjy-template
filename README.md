@@ -10,9 +10,7 @@ npm install fis3-postprocessor-rjy-template -g
 
 **arttemplate** https://github.com/aui/artTemplate
 
-## 使用
-
-fis-conf.js中
+## fis-conf.js中使用
 
 ```javascript
 fis.match('**.html', {
@@ -20,7 +18,7 @@ fis.match('**.html', {
 });
 ```
 
-模板页中
+##模板页中
 
 **`@@tmpl_start:`后面跟着的必须是json字符串**
 
