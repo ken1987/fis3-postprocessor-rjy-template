@@ -2,9 +2,9 @@
 
 纯前端的模版动态加载方案，即标准化后对特定模版进行动态绑定。
 
-## 安装
-
-待完善
+```script
+npm install fis3-postprocessor-rjy-template -g
+````
 
 ##模版引擎
 
