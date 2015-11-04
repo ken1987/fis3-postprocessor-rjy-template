@@ -8,6 +8,10 @@
 
 ## 使用
 
+模版引擎
+
+**arttemplate** https://github.com/aui/artTemplate
+
 fis-conf.js中
 
 ```javascript
