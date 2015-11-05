@@ -1,19 +1,19 @@
 {
-  "name": "fis3-postprocessor-rjy-template",
-  "version": "1.0.0",
-  "description": "Html template compiler tool",
-  "main": "index.js",
-  "keywords": [
-    "template"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ken1987/fis3-postprocessor-rjy-template.git"
-  },
-  "dependencies": {
-    "art-template": "^3.0",
-    "fis3": "^3.0"
-  },
-  "author": "ken",
-  "license": "MIT"
+    "name": "fis3-postprocessor-rjy-template",
+    "version": "1.0.3",
+    "description": "Html template compiler tool",
+    "main": "index.js",
+    "keywords": [
+        "template"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ken1987/fis3-postprocessor-rjy-template.git"
+    },
+    "dependencies": {
+        "art-template": "^3.0",
+        "fis3": "^3.0"
+    },
+    "author": "ken",
+    "license": "MIT"
 }
