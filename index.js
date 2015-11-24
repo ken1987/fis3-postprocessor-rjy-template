@@ -1,36 +1,28 @@
 var template = require('./template.js');
+var reg = /<\!--rjy_template_start:(.*?)-->([\s\S]*?)<\!--rjy_template_end-->/g; //匹配内容
 
 module.exports = function(content, file, settings) {
-    var regConfig = /<\!--\s*tmpl-config=('|")([\s\S]*?)\1\s*-->/g; //匹配配置文件路径
-    var regContent = /<\!--@@tmpl_start:(.*?)-->([\s\S]*?)<\!--@@tmpl_end-->/g; //匹配内容
-    var json = {};
-    var configFile;
-    var path;
-
-    //获取配置文件路径信息
-    content.replace(regConfig, function(str, _1, _2) {
-        path = _2;
-        return "";
-    });
-
-    //获取配置文件
-    if (path !== void 0) {
-        path = fis.uri(path, file.dirname);
-        configFile = fis.file(path && path.file ? path.file.origin : "");
-
-        //配置文件存在
-        if (configFile.exists()) {
-            //是否是正确的json格式
-            jsonStr = configFile.getContent();
-            try {
-                json = JSON.parse(jsonStr);
-            } catch (e) {
-                console.error("fis3-postprocessor-rjy-template：解析json字符串时出错！");
+    return content.replace(reg, function(all, str, tmpl) {
+        var json, path, newFile;
+        //如果是url(path)格式，表示传入的是路径，否则是字符串
+        if (/^url\(.*\)/.test(str)) {
+            path = fis.uri(str.substr(4, str.length - 5), file.dirname); //获取绝对路径
+            newFile = fis.file(path && path.file ? path.file.origin : ""); //获取文件
+            if (newFile.exists()) {
+                try {
+                    json = JSON.parse(newFile && newFile.getContent());
+                } catch (e) {
+                    console.error("\n fis3-postprocessor-rjy-template：解析json字符串时出错，请检查数据格式！");
+                }
             }
+        } else {
+            json = str;
         }
-    }
-
-    return content.replace(regContent, function(str, _1, _2) {
-        return template.compile(_2)(json[_1]);
+        if (json == void(0) || json === "") {
+            console.error("\n fis3-postprocessor-rjy-template：数据不存在！");
+            return tmpl;
+        } else {
+            return template.compile(tmpl)(json);
+        }
     });
 };
