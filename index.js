@@ -28,9 +28,28 @@ module.exports = function(content, file, settings) {
 
                 if (options.id !== void 0) {
                     var ids = options.id.split(".");
-                    for (i = 0, l = ids.length; i < l; i++) {
-                        json = json && json[ids[i]];
+                    var mainId = ids[0];
+                    var _json;
+
+                    //根据正则获取数据
+                    for (i = 0, l = json.length; i < l; i++) {
+                        n = json[i];
+                        if (n && n.reg && new RegExp(n.reg).test(mainId)) {
+                            _json = n;
+                        }
                     }
+
+                    json = _json;
+
+                    //获取属性
+                    for (i = 1, l = ids.length; i < l; i++) {
+                        if (json) {
+                            json = json[ids[i]];
+                        } else {
+                            break;
+                        }
+                    }
+
                 }
             }
         }
