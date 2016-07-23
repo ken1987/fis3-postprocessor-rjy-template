@@ -1,6 +1,6 @@
 {
   "name": "fis3-postprocessor-rjy-template",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Html template compiler tool",
   "main": "index.js",
   "keywords": [
